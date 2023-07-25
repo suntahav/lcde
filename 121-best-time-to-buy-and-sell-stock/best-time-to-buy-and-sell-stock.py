@@ -11,8 +11,7 @@ class Solution:
                 lp = rp
                 rp += 1
             else :
-                if max_profit < (prices[rp] - prices[lp]):
-                    max_profit = prices[rp] - prices[lp]
+                max_profit = max(max_profit, prices[rp] - prices[lp])
                 rp += 1
             
             
