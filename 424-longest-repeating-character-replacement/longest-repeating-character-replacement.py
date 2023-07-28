@@ -20,7 +20,6 @@ class Solution:
                 # max element
                 rp += 1
                 if hash_map[ord(s[rp]) - ord('A')] == max(hash_map):
-                    
                     length += 1
                     hash_map[ord(s[rp]) - ord('A')] += 1
                 else:
