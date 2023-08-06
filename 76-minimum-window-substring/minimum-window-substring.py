@@ -19,9 +19,7 @@ class Solution:
         res = ""
         temp_map = {}
         while rp < len(s):
-            # print(rp)
-            # print("-----",lp)
-            flag = True
+
             # Add to temp map when moving rp if present in original hashmap
             if s[rp] in hash_map:
                 if s[rp] in temp_map:
@@ -34,14 +32,17 @@ class Solution:
                 
                 #Shortening the string
                 while lp < len(s):
+                    #the lp char not present
                     if s[lp] not in temp_map:
                         lp += 1
+                    #the lp char present but more than needed so decrement in temp map
                     elif temp_map[s[lp]] > hash_map[s[lp]]:
                         temp_map[s[lp]] -= 1
                         lp += 1
-                        
                     else:
+                        #else break as this char is required
                         break
+                #keep the shortened string in res if required
                 if res == "":
                     res = s[lp:rp+1]
                 else:
@@ -50,16 +51,10 @@ class Solution:
                 if s[lp] in temp_map:
                     temp_map[s[lp]] -= 1
                 lp += 1
-                # flag = False
-                # print(res)
                 
                 if lp >= len(s):
                     break
-                
-
-            #Increment right pointer
-            if flag:
-                rp += 1
+            rp += 1
         
         #final shrink
         while lp < len(s) and (s[lp] not in temp_map):
