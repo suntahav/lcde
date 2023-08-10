@@ -5,6 +5,7 @@
 #         self.next = next
 class Solution:
     def mergeTwoList(self, lists):
+        #merge two lists like in mergesort
         length = len(lists)
         if length == 0:
             return None
@@ -49,8 +50,10 @@ class Solution:
         length = len(lists)
         if length > 2:
             div = length // 2
+            #Divide and Conquer like merge sort recursively
             left = self.mergeKLists(lists[:div])
             right = self.mergeKLists(lists[div:])
+            #merge resultant
             res = self.mergeTwoList([left, right])
         else:
             if len(lists) == 2:
