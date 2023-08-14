@@ -6,6 +6,7 @@
 #         self.right = right
 class Solution:
     def checkEqual(self, root, subRoot):
+        #First 3 ifs check the edge cases because we need to match exact subtree including Nulls
         if (root is None) and (subRoot is None):
             return True
         
@@ -33,11 +34,13 @@ class Solution:
         
         if root.val == subRoot.val:
             if self.checkEqual(root, subRoot):
+               #only if equal subtree we say yes
                 return True
+         # If the root value matches but not equal we still have to check left and right for subtrees
         left = self.isSubtree(root.left, subRoot)
         right = self.isSubtree(root.right, subRoot)
-        # print(root.val, subRoot.val, left , right)
         if left or right:
+            #either one satisfies will work
             return True
     
         return False
