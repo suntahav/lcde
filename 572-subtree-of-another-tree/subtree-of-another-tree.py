@@ -17,6 +17,7 @@ class Solution:
             res += right
         return res
     def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
+        #Do DFS and make strings and see if the subtree string is in main tree
         main_tree = self.dfs(root)
         subtree = self.dfs(subRoot)
         if subtree in main_tree :
