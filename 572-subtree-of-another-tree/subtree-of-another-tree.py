@@ -36,7 +36,7 @@ class Solution:
                 return True
         left = self.isSubtree(root.left, subRoot)
         right = self.isSubtree(root.right, subRoot)
-        print(root.val, subRoot.val, left , right)
+        # print(root.val, subRoot.val, left , right)
         if left or right:
             return True
     
