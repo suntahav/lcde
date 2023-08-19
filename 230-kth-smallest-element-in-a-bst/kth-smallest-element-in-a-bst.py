@@ -5,21 +5,21 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def inorderTraverse(self, root, arr,k):
-        if len(arr) == k:
-            return
-        if root:
-            self.inorderTraverse(root.left, arr, k)
-            if len(arr) == k:
-                return
-            arr.append(root.val)
-            if len(arr) == k:
-                return
-            self.inorderTraverse(root.right, arr, k)
-            if len(arr) == k:
-                return
-        return
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
         arr = deque()
-        self.inorderTraverse(root, arr,k)
-        return arr.pop()
+        curr = root
+        while True:
+            while curr:
+                arr.append(curr)
+                curr = curr.left
+            if not arr:
+                break
+            
+            elem = arr.pop()
+            k -= 1
+
+            if k==0:
+                return elem.val
+            
+            curr = elem.right
+        
