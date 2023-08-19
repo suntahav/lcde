@@ -17,11 +17,14 @@ class Solution:
             #     #no nodes in arr empty not possible
             #     break
             
+            #pop the node
             elem = arr.pop()
+            #reduce the count
             k -= 1
 
             if k==0:
+                #if reached then the recently popped node is the node
                 return elem.val
-            
+            #else move to right and repeat same process
             curr = elem.right
         
