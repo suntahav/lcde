@@ -10,10 +10,12 @@ class Solution:
         curr = root
         while True:
             while curr:
+                #add all left nodes starting from left
                 arr.append(curr)
                 curr = curr.left
-            if not arr:
-                break
+            # if not arr:
+            #     #no nodes in arr empty not possible
+            #     break
             
             elem = arr.pop()
             k -= 1
