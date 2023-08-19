@@ -5,32 +5,17 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def inorderTraverse(self, root, arr):
-        if root:
-            self.inorderTraverse(root.left, arr)
-            arr.append(root.val)
-            self.inorderTraverse(root.right, arr)
-        
-        return
-    def checkIncreasing(self, arr):
-        length = len(arr)
-        flag = True
-        if len(arr) == 1:
-            return flag
-        for i in range(1, len(arr)):
-            if arr[i] <= arr[i-1]:
-                flag = False
-                break
-        return flag
-
-    def isValidBST(self, root: Optional[TreeNode]) -> bool:
-        arr = []
-        self.inorderTraverse(root, arr)
-        if arr:
-            return self.checkIncreasing(arr)
-        else:
+    def _isValidBST(self, root, mx=None, mn=None):
+        if root is None:
             return True
-
+        if root.val < mx and root.val > mn:
+            left = self._isValidBST(root.left, mn = mn, mx = min(root.val, mx))
+            right = self._isValidBST(root.right, mn = max(mn, root.val), mx = mx)
+            if left and right:
+                return True
+        return False
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        return self._isValidBST(root, mx = float("inf"), mn = float('-inf'))
         
         
         
