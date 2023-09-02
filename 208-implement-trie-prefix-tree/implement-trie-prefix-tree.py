@@ -10,36 +10,35 @@ class Trie:
 
     def insert(self, word: str) -> None:
         node = self.root
-        for i in range(len(word)):
-            if word[i] in node.children:
-                node = node.children[word[i]]
+        for c in word:
+            if c in node.children:
+                node = node.children[c]
             else:
-                node.children[word[i]] = Node()
-                node = node.children[word[i]]
+                node.children[c] = Node()
+                node = node.children[c]
 
-            if i == len(word) - 1:
-                node.isEndWord = True
+        node.isEndWord = True
         
 
         
 
     def search(self, word: str) -> bool:
         node = self.root
-        for i in range(len(word)):
-            if word[i] not in node.children:
+        for c in word:
+            if c not in node.children:
                 return False
             else:
-                node = node.children[word[i]]
+                node = node.children[c]
         return node.isEndWord
         
 
     def startsWith(self, prefix: str) -> bool:
         node = self.root
-        for i in range(len(prefix)):
-            if prefix[i] not in node.children:
+        for c in prefix:
+            if c not in node.children:
                 return False
             else:
-                node = node.children[prefix[i]]
+                node = node.children[c]
         return True 
         
 
