@@ -1,57 +1,46 @@
+class Node:
+    def __init__(self):
+        self.children = {}
+        self.isEndWord = False
 class Trie:
 
     def __init__(self):
-        self.trie = [0] * 27
-
+        self.root = Node()
+        
 
     def insert(self, word: str) -> None:
-        def _insert(trie, word):
-            if type(trie[ord(word[0]) - ord('a') + 1]) == int:
-                #No word like this so add new node
-
-                #The new trie node
-                trie[ord(word[0])- ord('a') + 1] = Trie()
-                if len(word) == 1:
-                    #forms a complete word
-                    trie[ord(word[0])- ord('a') + 1].trie[0] = 1
-                else:
-                    #otherwise recursively add all the chars
-                    _insert(trie[ord(word[0])- ord('a') + 1].trie, word[1:])
+        node = self.root
+        for i in range(len(word)):
+            if word[i] in node.children:
+                node = node.children[word[i]]
             else:
-                if len(word) == 1:
-                    trie[ord(word[0])- ord('a') + 1].trie[0] = 1
-                else:
-                    #the case the node is already a trie node or there has already been prefix like this
-                    _insert(trie[ord(word[0])- ord('a') + 1].trie, word[1:])
-        _insert(self.trie, word)
-            
-                
+                node.children[word[i]] = Node()
+                node = node.children[word[i]]
+
+            if i == len(word) - 1:
+                node.isEndWord = True
+        
 
         
 
     def search(self, word: str) -> bool:
-        # print(self.trie)
-        temp_trie = self.trie
+        node = self.root
         for i in range(len(word)):
-            if type(temp_trie[ord(word[i])- ord('a') + 1]) is not Trie:
+            if word[i] not in node.children:
                 return False
             else:
-                temp_trie = temp_trie[ord(word[i])- ord('a') + 1].trie
-        if temp_trie[0] != 1:
-            return False
-        else:
-            return True
+                node = node.children[word[i]]
+        return node.isEndWord
         
 
     def startsWith(self, prefix: str) -> bool:
-        temp_trie = self.trie
+        node = self.root
         for i in range(len(prefix)):
-            if type(temp_trie[ord(prefix[i])- ord('a') + 1]) is not Trie:
+            if prefix[i] not in node.children:
                 return False
             else:
-                temp_trie = temp_trie[ord(prefix[i])- ord('a') + 1].trie
-        return True
-
+                node = node.children[prefix[i]]
+        return True 
         
 
 
