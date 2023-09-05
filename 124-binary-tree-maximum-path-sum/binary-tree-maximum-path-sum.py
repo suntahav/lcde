@@ -28,7 +28,7 @@ class Solution:
                 overall_best_tree = max(left_tree, right_tree, cur_tree)
                 return overall_best_tree, cur_max
             else:
-                return -1000000000, 0
+                return float('-inf'), 0
                     
         tree, max_val = dfs(root)
         return max(tree, max_val)
