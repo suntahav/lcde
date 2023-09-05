@@ -18,16 +18,25 @@ class Solution:
             # else:
             #     return -100000000, 0, 0
 
-            if node:
+            if node: #if node exist
+                #check left for its max tree and max left subtree (no split)
                 left_tree, left_max = dfs(node.left)
+                #do same for right
                 right_tree, right_max = dfs(node.right)
+                #take equal to 0 because if negative no sense in taking 
                 left_max = max(left_max, 0)
+                #same for right
                 right_max = max(right_max, 0)
+                #create the optimal tree for this tree as it is final answer
                 cur_tree = node.val + left_max + right_max
+                #create a subtree for level above
                 cur_max = node.val + max(left_max, right_max)
+                #calculate the best complete tree among all
                 overall_best_tree = max(left_tree, right_tree, cur_tree)
+                #return both the optimal tree and subtree to be used as branch
                 return overall_best_tree, cur_max
             else:
+                #return negative infinity as there can be negative tree as well and 0 for max val
                 return float('-inf'), 0
                     
         tree, max_val = dfs(root)
