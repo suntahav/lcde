@@ -14,10 +14,14 @@ class Solution:
                 return
             if grid[i][j] == '1':
                 grid[i][j] = '2'
-                fillGrid(i-1, j)
-                fillGrid(i+1, j)
-                fillGrid(i, j-1)
-                fillGrid(i, j+1)
+                if i >= 1 and grid[i-1][j] == '1':
+                    fillGrid(i-1, j)
+                if i < row-1 and grid[i+1][j] == '1':
+                    fillGrid(i+1, j)
+                if j >= 1 and grid[i][j-1] == '1':
+                    fillGrid(i, j-1)
+                if j < col-1 and grid[i][j+1] == '1':
+                    fillGrid(i, j+1)
         for i in range(row):
             for j in range(col):
                 if grid[i][j] == '1':
