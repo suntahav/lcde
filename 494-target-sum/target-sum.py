@@ -2,7 +2,8 @@ class Solution:
     def findTargetSumWays(self, nums: List[int], target: int) -> int:
         res = [0]
         l = len(nums)
-        @lru_cache(None)
+        cache = {}
+        # @lru_cache(None)
         def recCall(idx, sum):
             #Base case
             if l == idx:
@@ -14,7 +15,17 @@ class Solution:
                     return 0
             else:
                 #One for include
-               return recCall(idx + 1, sum+nums[idx]) + recCall(idx + 1, sum-nums[idx])
+                if (idx+1, sum+nums[idx]) in cache:
+                    a = cache[(idx+1, sum+nums[idx])]
+                else:
+                    a = recCall(idx + 1, sum+nums[idx])
+                    cache[(idx+1, sum+nums[idx])] = a
+                if (idx + 1, sum-nums[idx]) in cache:
+                    b = cache[(idx + 1, sum-nums[idx])]
+                else:
+                    b = recCall(idx + 1, sum-nums[idx])
+                    cache[(idx + 1, sum-nums[idx])] = b
+                return  a + b
                 #Remove
                 
         return recCall(0, 0)
