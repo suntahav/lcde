@@ -3,7 +3,7 @@ class Solution:
         res = [0]
         l = len(nums)
         cache = {}
-        @lru_cache(None)
+        # @lru_cache(None)
         def recCall(idx, sum):
             #Base case
             if l == idx:
