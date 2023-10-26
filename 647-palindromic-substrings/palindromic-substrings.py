@@ -1,19 +1,21 @@
 class Solution:
     def countSubstrings(self, s: str) -> int:
         length = len(s)
-        res = []
+        res = 0
         def expand(left, right):
             temp = []
+            res = 0
             while left >=0 and right < length and s[left] == s[right]:
-                res.append(s[left: right + 1])
+                res += 1
                 left -= 1
                 right += 1
+            return res
         
         for i in range(length):
-            expand(i, i)
-            expand(i, i+1)
+            res += expand(i, i)
+            res += expand(i, i+1)
         #handling the case where left != right(i != i+1)
         # res.remove('')
         
-        return len(res)
+        return res
         
