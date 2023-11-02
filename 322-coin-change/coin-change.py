@@ -4,15 +4,15 @@ class Solution:
         dp = {}
         MIN = min(coins)
         for c in coins:
-            dp[c] = (1, True)
+            dp[c] = 1
         def calculate(amt):
             if amt == 0:
-                dp[amt] = (0, True)
+                dp[amt] = 0
                 return dp[amt]
             if amt in dp:
                 return dp[amt]
             if amt < MIN:
-                dp[amt] = (-1, False)
+                dp[amt] = -1
                 return dp[amt]
             else:
                 for c in coins:
@@ -21,17 +21,17 @@ class Solution:
                     else:
                         remainder = amt - c
                         # print(remainder)
-                        tot_coins, is_Possible = calculate(remainder)
-                        if is_Possible:
+                        tot_coins = calculate(remainder)
+                        if tot_coins != -1:
                             if amt in dp:
-                                dp[amt] = (min(1 + tot_coins, dp[amt][0]), True)    
+                                dp[amt] = min(1 + tot_coins, dp[amt]) 
                             else:
-                                dp[amt] = (1 + tot_coins, True)
+                                dp[amt] = 1 + tot_coins
                 if amt in dp:
                     return dp[amt]
                 else:
-                    dp[amt] = (-1, False)
+                    dp[amt] = -1
                     return dp[amt]
         
-        total_coins, is_Possible = calculate(amount)
+        total_coins = calculate(amount)
         return total_coins
