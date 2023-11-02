@@ -1,6 +1,6 @@
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
-        coins = sorted(coins)
+        coins = sorted(coins)[::-1]
         dp = {}
         MIN = min(coins)
         for c in coins:
