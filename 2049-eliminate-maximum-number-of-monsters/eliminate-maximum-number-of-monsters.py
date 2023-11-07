@@ -1,7 +1,7 @@
 class Solution:
     def eliminateMaximum(self, dist: List[int], speed: List[int]) -> int:
-        time_needed = [x/y for x,y in zip(dist, speed)]
-        sorted_time = sorted(time_needed)
+        sorted_time = [x/y for x,y in zip(dist, speed)]
+        sorted_time.sort()
         counter= 0
         l = len(sorted_time)
         for i in range(l):
