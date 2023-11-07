@@ -5,10 +5,9 @@ class Solution:
         counter= 0
         l = len(sorted_time)
         for i in range(l):
-            if sorted_time[i] - counter > 0:
-                counter += 1
-            else:
+            if sorted_time[i] - counter <= 0:
                 break
+            counter += 1
 
         return counter
         
