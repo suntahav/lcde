@@ -28,7 +28,7 @@ class Solution:
         right = 0
         LEN = len(nums)
         min_len = float("inf")
-        while right < LEN and left <= right:
+        for right in range(LEN):
             total += nums[right]
             while total >= target:
                 min_len = min(min_len, right-left+1)
