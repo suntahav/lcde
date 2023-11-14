@@ -17,4 +17,4 @@ class Solution:
                     last_idx = i
                 else:
                     temp.add(s[i])
-        return sum(list(mapper.values()))
+        return sum((mapper.values()))
