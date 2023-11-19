@@ -5,10 +5,10 @@ class Solution:
         LEN = len(nums)
         curr_num = nums[0]
         inc = 0
-        for i in range(1, LEN):
-            if curr_num != nums[i]:
+        for num in nums:
+            if curr_num != num:
                 inc += 1
-                curr_num = nums[i]
+                curr_num = num
             res += inc
         return res
 
