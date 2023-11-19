@@ -8,10 +8,8 @@ class Solution:
         for i in range(1, LEN):
             if curr_num != nums[i]:
                 inc += 1
-                res += inc
                 curr_num = nums[i]
-            else:
-                res += inc
+            res += inc
         return res
 
 
