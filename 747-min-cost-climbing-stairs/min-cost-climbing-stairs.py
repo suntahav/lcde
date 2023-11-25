@@ -1,9 +1,9 @@
 class Solution:
     def minCostClimbingStairs(self, cost: List[int]) -> int:
-        dp = [-1] * len(cost)
+        dp = {}
         def calculate(idx, cost):
             #if already exist
-            if dp[idx] != -1:
+            if idx in dp:
                 return dp[idx]
             #base case
             if idx == len(cost)-1:
