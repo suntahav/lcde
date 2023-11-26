@@ -8,9 +8,7 @@ class Solution:
         while i >= 0:
             if carry == 0:
                 break
-            new_carry = (digits[i] + carry)//10
-            digits[i] = (digits[i] + carry)%10
-            carry = new_carry
+            carry, digits[i] = (digits[i] + carry)//10, (digits[i] + carry)%10
             i -= 1
         if carry != 0 :
             digits.insert(0, carry)
