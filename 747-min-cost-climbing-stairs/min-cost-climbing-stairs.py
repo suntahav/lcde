@@ -21,7 +21,6 @@ class Solution:
         
         LEN = len(cost)
         for i in range(2, LEN):
-            m = min(cost[i-2], cost[i-1])
-            cost[i] += m
+            cost[i] += min(cost[i-2], cost[i-1])
         return min(cost[-1], cost[-2])
 
