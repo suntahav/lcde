@@ -3,15 +3,22 @@ class Solution:
         """
         Do not return anything, modify matrix in-place instead.
         """
-        # temp = [[-1001]*len(matrix) for i in range(len(matrix))]
-        temp = []
-        l = len(matrix)
-        for col in range(len(matrix)):
-            r = []
-            for row in range(len(matrix)):
-                r.append(matrix[row][col])
-            temp.append(r[::-1])
-        for row in range(len(matrix)):
-            for col in range(len(matrix)):
-                matrix[row][col] = temp[row][col]
-        
+        def calculate(left, right, matrix):
+            if left == right :
+                return
+            if right - left == 1:
+                temp = matrix[left][left]
+                matrix[left][right], temp = temp, matrix[left][right]
+                matrix[right][right], temp = temp, matrix[right][right]
+                matrix[right][left], temp = temp, matrix[right][left]
+                matrix[left][left] = temp
+                return
+            for i in range(left, right):
+                temp = matrix[i][right]
+                matrix[i][right] = matrix[left][i]
+                temp,  matrix[right][right-i + left] = matrix[right][right - i+left], temp
+                matrix[right-i+left][left], temp = temp, matrix[right-i+left][left]
+                matrix[left][i] = temp
+            return calculate(left + 1, right - 1, matrix)
+        r = len(matrix[0])
+        calculate(0, r-1, matrix)
