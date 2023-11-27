@@ -12,8 +12,9 @@ class Solution:
         #handle rows 
         for i in range(ROWS):
             for j in range(COLS):
-                rows[i] *= matrix[i][j]
-                cols[j] *= matrix[i][j]
+                if matrix[i][j] == 0:
+                    rows[i] = 0
+                    cols[j] = 0
         
         #Inplace operation
         for i in range(ROWS):
