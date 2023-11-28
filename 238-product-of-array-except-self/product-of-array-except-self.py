@@ -9,7 +9,7 @@ class Solution:
             right *= nums[i]
             if nums[i] == 0:
                 counter_zero += 1
-        res = [0] * LEN
+        # res = [0] * LEN
         i = 0
         while i < LEN:
             
