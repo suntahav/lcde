@@ -9,7 +9,8 @@ class Solution:
             if nums[i] == 0:
                 counter_zero += 1
         res = [0] * LEN
-        for i in range(LEN):
+        i = 0
+        while i < LEN:
             
             if nums[i] != 0:
                 right = right // nums[i]
@@ -23,5 +24,6 @@ class Solution:
                 res[i] = 0
             res[i] = left * right
             left *= nums[i]
+            i+=1
         return res
         
