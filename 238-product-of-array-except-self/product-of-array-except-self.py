@@ -1,5 +1,6 @@
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
+        #O(1) soln
         LEN  = len(nums)
         left = 1
         right = 1
@@ -21,9 +22,10 @@ class Solution:
                     for j in range(i+1, LEN):
                         right *= nums[j]
             if left==0 or right==0:
-                res[i] = 0
-            res[i] = left * right
+                temp = 0
+            temp = left * right
             left *= nums[i]
+            nums[i] = temp
             i+=1
-        return res
+        return nums
         
