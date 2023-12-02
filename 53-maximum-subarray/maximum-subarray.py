@@ -5,6 +5,5 @@ class Solution:
         res[0] = nums[0]
         for i in range(1, len(nums)):
             res[i] = max(nums[i], nums[i]+res[i-1])
-        print(res)
         return max(res)
         
