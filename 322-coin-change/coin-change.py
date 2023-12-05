@@ -1,37 +1,23 @@
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
-        coins = sorted(coins)[::-1]
-        dp = {}
-        MIN = min(coins)
-        for c in coins:
-            dp[c] = 1
-        def calculate(amt):
-            if amt == 0:
-                dp[amt] = 0
-                return dp[amt]
-            if amt in dp:
-                return dp[amt]
-            if amt < MIN:
-                dp[amt] = -1
-                return dp[amt]
+        INT_MAX = 2**31
+        LEN = len(coins)
+        matrix = [[0] * (amount+1) for i in range(LEN+1)]
+
+        for i in range( amount+1):
+            matrix[0][i] = INT_MAX
+        for i in range(1, amount+1):
+            if i%coins[0] == 0:
+                matrix[1][i] = i // coins[0]
             else:
-                for c in coins:
-                    if c > amt:
-                        continue
-                    else:
-                        remainder = amt - c
-                        # print(remainder)
-                        tot_coins = calculate(remainder)
-                        if tot_coins != -1:
-                            if amt in dp:
-                                dp[amt] = min(1 + tot_coins, dp[amt]) 
-                            else:
-                                dp[amt] = 1 + tot_coins
-                if amt in dp:
-                    return dp[amt]
-                else:
-                    dp[amt] = -1
-                    return dp[amt]
+                matrix[1][i] = INT_MAX
         
-        total_coins = calculate(amount)
-        return total_coins
+        for i in range(1, LEN+1):
+            for j in range(1, amount+1):
+                if coins[i-1] <= j:
+                    matrix[i][j] = min(matrix[i][j-coins[i-1]] + 1, matrix[i-1][j])
+                else:
+                    matrix[i][j] = matrix[i-1][j]
+        if matrix[LEN][amount] >= INT_MAX:
+            return -1
+        return matrix[LEN][amount]
