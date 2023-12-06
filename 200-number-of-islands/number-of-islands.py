@@ -1,33 +1,35 @@
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
-        counter = 0
-        row = len(grid)
-        col = len(grid[0])
-        # def checkGrid(i,j):
-        #     if (i not in range(row)) or (j not in range(col)):
-        #         return False
-        #     if grid[i][j] == '1':
-        #         return True
-        #     return False
-        def fillGrid(i, j):
-            if (i not in range(row)) or (j not in range(col)):
-                return
-            if grid[i][j] == '1':
-                grid[i][j] = '2'
-                if i >= 1 and grid[i-1][j] == '1':
-                    fillGrid(i-1, j)
-                if i < row-1 and grid[i+1][j] == '1':
-                    fillGrid(i+1, j)
-                if j >= 1 and grid[i][j-1] == '1':
-                    fillGrid(i, j-1)
-                if j < col-1 and grid[i][j+1] == '1':
-                    fillGrid(i, j+1)
-        for i in range(row):
-            for j in range(col):
-                if grid[i][j] == '1':
-                    counter += 1
-                    fillGrid(i,j)
-        # print(grid)
-        return counter
 
+        if not grid:
+            return 0
+        ROWS = len(grid)
+        COLS = len(grid[0])
+        visited = set()
+
+        def bfs(i, j):
+            visited.add((i,j))
+            q = collections.deque()
+            q.append((i,j))
+            directions = [[0,1], [0,-1], [1,0], [-1,0]]
+
+            while q:
+                row, col = q.popleft()
+                for r,c in directions:
+                    n_row = row + r
+                    n_col = col + c
+                    if (n_row in range(ROWS)) and (n_col in range(COLS)) and grid[n_row][n_col]=='1' and ((n_row, n_col) not in visited):
+                        visited.add((n_row, n_col))
+                        q.append((n_row, n_col))
+
+
+        
+        
+        counter = 0
+        for i in range(ROWS):
+            for j in range(COLS):
+                if  grid[i][j]=='1' and (i,j) not in visited:
+                    counter += 1
+                    bfs(i,j)
+        return counter
         
