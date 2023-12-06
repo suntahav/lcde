@@ -21,10 +21,20 @@ class MedianFinder:
         #         heapq.heappush(self.left, -heapq.heappop(self.right))
         #     else:
         #         heapq.heappush(self.right, -heapq.heappop(self.left))
-        if len(self.left)==len(self.right):
-            heapq.heappush(self.right, -heapq.heappushpop(self.left, -num))
-        else:
-            heapq.heappush(self.left, -heapq.heappushpop(self.right, num))
+        # if len(self.left)==len(self.right):
+        #     heapq.heappush(self.right, -heapq.heappushpop(self.left, -num))
+        # else:
+        #     heapq.heappush(self.left, -heapq.heappushpop(self.right, num))
+        heapq.heappush(self.left, -num)
+
+        if self.left and self.right and (self.right[0] < -self.left[0]):
+            heapq.heappush(self.right, -heapq.heappop(self.left))
+
+        if len(self.left) - len(self.right) > 1:
+            heapq.heappush(self.right, -heapq.heappop(self.left))
+
+        if len(self.right) - len(self.left) > 1:
+            heapq.heappush(self.left, -heapq.heappop(self.right))
 
             
             
