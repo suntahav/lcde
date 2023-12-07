@@ -1,54 +1,19 @@
 class Solution:
     def isValidSudoku(self, board: List[List[str]]) -> bool:
         
-        #rows
+        rows = collections.defaultdict(set)
+        cols = collections.defaultdict(set)
+        box = collections.defaultdict(set)
         for i in range(9):
-            row = []
-            col = []
             for j in range(9):
-                row.append(board[i][j])
-                col.append(board[j][i])
-            rc = collections.Counter(row)
-            cc = collections.Counter(col)
-            r_c = rc.most_common(2)
-            c_c = cc.most_common(2)
-            if r_c[0][0] == '.':
-                if len(r_c)>1 and r_c[1][1] > 1:
-                    return False
-            else:
-                if r_c[0][1] > 1:
-                    return False
-            
-            if c_c[0][0] == '.':
-                if len(c_c) > 1 and c_c[1][1] > 1:
-                    return False
-            else:
-                if c_c[0][1] > 1:
-                    return False
-        for r in range(3):
-          for c in range(3):
-            box = []
-            for j in range(r*3,3*(r+1)):
-              for k in range(c*3,3*(c+1)):
-                box.append(board[j][k])
-            counter = collections.Counter(box)
-            r_c = counter.most_common(2)
-            # print(r_c)
-            if r_c[0][0] == '.':
-                if len(r_c)>1 and r_c[1][1] > 1:
-                    return False
-            else:
-                if r_c[0][1] > 1:
-                    return False
-
+              e = board[i][j]
+              if e == '.':
+                continue
+              if e in rows[i] or e in cols[j] or e in box[(i//3,j//3)]:
+                return False
+              else:
+                rows[i].add(e)
+                cols[j].add(e)
+                box[(i//3,j//3)].add(e)
         return True
-
-# [[".",".",".",".","5",".",".","1","."],
-#  [".","4",".","3",".",".",".",".","."],
-#  [".",".",".",".",".","3",".",".","1"],
-#  ["8",".",".",".",".",".",".","2","."],
-#  [".",".","2",".","7",".",".",".","."],
-#  [".","1","5",".",".",".",".",".","."],
-#  [".",".",".",".",".","2",".",".","."],
-#  [".","2",".","9",".",".",".",".","."],
-#  [".",".","4",".",".",".",".",".","."]]        
+    
