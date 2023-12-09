@@ -12,6 +12,8 @@ class Solution:
                 return True, 0
             
             left = calculate(node.left)
+            if not left[0]:
+                return False, 0
             right = calculate(node.right)
 
             if left[0] and right[0]:
