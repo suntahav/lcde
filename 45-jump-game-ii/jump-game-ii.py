@@ -1,19 +1,16 @@
 class Solution:
     def jump(self, nums: List[int]) -> int:
-        res = [-1] * len(nums)
+        LEN = len(nums)
+        res = [10000000] * LEN
 
-        def calculate(idx):
-            if idx == len(nums)-1:
-                return 0
-            if res[idx] != -1:
-                return res[idx]
-            min_val = 1000000
-            for i in range(1, nums[idx]+1):
-                if idx + i >= len(nums):
-                    continue
-                min_val = min(min_val, 1+calculate(idx+i))
-            res[idx] = min_val
-            return min_val
-        return calculate(0)
+        res[LEN-1] = 0
+        i= LEN-2
+        while i >=0:
+            min_val = 10000000
+            for j in range(1, nums[i]+1):
+                if i+j < LEN:
+                    res[i] = min(res[i], 1+res[i+j])
+            i -= 1
+        return res[0]
 
         
