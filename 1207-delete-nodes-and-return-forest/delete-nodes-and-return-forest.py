@@ -6,42 +6,25 @@
 #         self.right = right
 class Solution:
     def delNodes(self, root: Optional[TreeNode], to_delete: List[int]) -> List[TreeNode]:
-        base = [root]
+        base = []
+        to_delete = set(to_delete)
 
-        def solve(node, value):
-            if node.val == value:
+        def solve(node):
+            if not node:
+                return None
+
+            node.left = solve(node.left)
+            node.right = solve(node.right)
+
+            if node.val in to_delete:
                 if node.left:
                     base.append(node.left)
                 if node.right:
                     base.append(node.right)
-                return True
-            else:
-                if node.left:
-                    if node.left.val == value:
-                        solve(node.left, value)
-                        node.left = None
-                    else:
-                       solve(node.left, value) 
-                if node.right:
-                    if node.right.val == value:
-                        solve(node.right, value)
-                        node.right = None
-                    else:
-                        solve(node.right, value)
-                return False
-        # to_remove = []
-        for d in to_delete:
-            for tree in base:
-                if tree.val == d:
-                    if tree.left:
-                        base.append(tree.left)
-                    if tree.right:
-                        base.append(tree.right)
-                    base.remove(tree)
-                    break
-                if solve(tree, d):
-                    break
-        # for r in to_remove:
-        #     base.remove(r)
+                return None
+            return node
+        root = solve(root)
+        if root:
+            base.append(root)
         return base
         
