@@ -6,7 +6,8 @@ class Solution:
             
             if dpstr in dp:
                 return dp[dpstr]
-            
+            if sorted(a) != sorted(b):
+                return False
             if len(a) != len(b):
                 return False
                 
