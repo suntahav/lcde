@@ -9,5 +9,7 @@ class Solution:
             elif p<s:
                 s=p
         val = money -f-s
-        return val if val >= 0 else money
+        if val >= 0:
+            return val
+        return money
         
