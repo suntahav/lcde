@@ -13,6 +13,5 @@ class Solution:
                 else:
                     j -=1
             dp[i] += temp
-        print(dp)
         return max(dp)
         
