@@ -6,23 +6,23 @@
 
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
-        fp = head
-        # while fp is not None:
-        #     if fp.val == 100001:
-        #         return True
-        #     else:
-        #         fp.val = 100001
-        #         fp = fp.next
-
-        # floyd cycle detection
-        sp = head
-        if fp == None:
+        if not head:
             return False
-        while (fp is not None) and (fp.next is not None):
-            fp = fp.next.next
-            sp = sp.next
+        one = head
+        two = head.next
+        if two:
+            two = two.next
+        else:
+            return False
 
-            if fp == sp:
+        while one and two:
+            if one == two:
                 return True
-        
+            one = one.next
+            two = two.next
+            if two:
+                two = two.next
+            else:
+                return False
         return False
+        
