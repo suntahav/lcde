@@ -9,7 +9,6 @@ class Solution:
         for i in range(2, 10):
             for j in range(1, 11-i):
                 all_nums.append(createDigit(j, i))
-        # print(all_nums)
         res = []
         for num in all_nums:
             if num >= low and num <= high:
